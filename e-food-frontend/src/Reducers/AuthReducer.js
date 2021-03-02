@@ -1,9 +1,9 @@
+import { AUTH_SUCCESS } from '../Actions'
+
 const AuthReducer = (state = null, action) => {
     switch(action.type) {
-        case 'USER_AUTH':
-            return {
-                test: 'test'
-            }
+        case AUTH_SUCCESS:
+            return action.user
         default:
             return state
     }

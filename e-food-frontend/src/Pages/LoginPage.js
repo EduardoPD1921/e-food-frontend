@@ -1,6 +1,8 @@
 import React from 'react'
-import axios from 'axios'
-import { connect } from 'react-redux'
+
+import Cookies from 'js-cookie'
+
+import { Redirect } from 'react-router-dom'
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -10,6 +12,7 @@ import { red } from '@material-ui/core/colors'
 
 import Nav from '../Components/Nav'
 import LoginInput from '../Components/LoginInput'
+import axios from 'axios'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
@@ -24,7 +27,8 @@ class LoginPage extends React.Component {
             password: '',
             errorMessage: '',
             isLoading: false,
-            isSnackbarOpen: false
+            isSnackbarOpen: false,
+            redirect: false
         }
 
         this.onChangeTextHandler = this.onChangeTextHandler.bind(this)
@@ -44,22 +48,33 @@ class LoginPage extends React.Component {
             password: this.state.password
         }
 
-        axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(resp => console.log(resp))
+        axios({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/api/user/login',
+            data: data
+        })
+            .then(resp => {
+                Cookies.set('token', resp.data.token, { secure: true })
 
-        // axios({
-        //     method: 'POST',
-        //     url: 'http://127.0.0.1:8000/api/user/login',
-        //     data: data
-        // }).then(resp => {
-        //     this.setState({ isLoading: false })
+                this.setState({ isLoading: false, errorMessage: '', redirect: true })
+            })
+            .catch(error => {
+                this.setErrorMessage(error.response.data)
 
-        //     console.log(resp)
-        // })
-        // .catch(error => {
-        //     this.setState({ isLoading: false })
+                this.setState({ isLoading: false })
+            })
+    }
 
-        //     console.log(error.response)
-        // })
+    setErrorMessage(error) {
+        if (error.email) {
+            return this.setState({ errorMessage: error.email[0] })
+        }
+
+        if (error.password) {
+            return this.setState({ errorMessage: error.password[0] })
+        }
+
+        return this.setState({ errorMessage: error })
     }
 
     onCloseSnackbar(event, reason) {
@@ -70,12 +85,28 @@ class LoginPage extends React.Component {
         this.setState({ isSnackbarOpen: false })
     }
 
+    redirectToMainPage() {
+        if (this.state.redirect) {
+            return <Redirect from="/login" to="/" />
+        }
+    }
+
     renderLoading() {
         if (this.state.isLoading) {
             return <CircularProgress style={{ color: red[800], fontSize: 5 }} />
         }
 
         return 'Login'
+    }
+
+    renderErrorMessage() {
+        if (this.state.errorMessage) {
+            return (
+                <ul>
+                    <li>{this.state.errorMessage}</li>
+                </ul>
+            )
+        }
     }
 
     render() {
@@ -98,8 +129,10 @@ class LoginPage extends React.Component {
                             className="login-form-submit">
                             {this.renderLoading()}
                         </button>
+                        {this.renderErrorMessage()}
                     </div>
                 </section>
+                {this.redirectToMainPage()}
             </div>
         )
     }
