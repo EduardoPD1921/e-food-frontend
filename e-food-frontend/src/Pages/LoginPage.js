@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -42,20 +44,22 @@ class LoginPage extends React.Component {
             password: this.state.password
         }
 
-        axios({
-            method: 'POST',
-            url: 'http://127.0.0.1:8000/api/user/login',
-            data: data
-        }).then(resp => {
-            this.setState({ isLoading: false })
+        axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(resp => console.log(resp))
 
-            console.log(resp)
-        })
-        .catch(error => {
-            this.setState({ isLoading: false })
+        // axios({
+        //     method: 'POST',
+        //     url: 'http://127.0.0.1:8000/api/user/login',
+        //     data: data
+        // }).then(resp => {
+        //     this.setState({ isLoading: false })
 
-            console.log(error.response)
-        })
+        //     console.log(resp)
+        // })
+        // .catch(error => {
+        //     this.setState({ isLoading: false })
+
+        //     console.log(error.response)
+        // })
     }
 
     onCloseSnackbar(event, reason) {

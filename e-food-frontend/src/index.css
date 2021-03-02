@@ -66,6 +66,7 @@ nav {
 .header-item {
   margin: 20px 20px;
   color: #494949;
+  text-decoration: none;
   transition: 0.1s;
 }
 
@@ -75,9 +76,11 @@ nav {
 
 #login-btn {
   background-color: white;
-  border-width: thin;
+  border-width: 2px;
   border-color: #ededed;
+  border-style: solid;
   border-radius: 4px;
+  text-decoration: none;
   color: #ea1d2c;
   padding: 16px 32px;
   text-align: center;
@@ -164,6 +167,7 @@ nav {
 
 #search-input input {
   flex: 3;
+  border-style: none;
   border-radius: 4px;
   -webkit-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
   -moz-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
@@ -173,6 +177,7 @@ nav {
 
 #search-input button {
   flex: 1;
+  border-style: none;
   margin-left: 20px;
   background-color: #ea1d2c;
   text-align: center;
@@ -449,6 +454,7 @@ ul {
 
 .login-form-submit {
   display: flex;
+  border-style: none;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
