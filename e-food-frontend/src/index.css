@@ -473,4 +473,24 @@ ul {
   border-bottom-color: #c2121f;
 } */
 
+/* Drawer */
+.drawer-section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #ea1d2c;
+  width: 200px;
+}
+
+.drawer-bottom-content {
+  justify-content: flex-end;
+}
+
+.drawer-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 
