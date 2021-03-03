@@ -1,10 +1,17 @@
 import React from 'react'
+import Cookies from 'js-cookie'
+
+import Menu from '../MaterialComponents/Menu'
 
 const Nav = ({ mainPage }) => {
+    const cookie = Cookies.get('token')
+
     const renderLoginButton = () => {
-        if (mainPage === true) {
-            return <a href="/register" id="login-btn"><span>Entrar</span></a>
+        if (cookie) {
+            return <Menu />
         }
+
+        return <a href="/register" id="login-btn"><span>Entrar</span></a>
     }
 
     return (
