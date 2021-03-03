@@ -469,10 +469,6 @@ ul {
   background-color: #c2121f;
 }
 
-/* input {
-  border-bottom-color: #c2121f;
-} */
-
 /* Drawer */
 .drawer-section {
   display: flex;
@@ -487,10 +483,14 @@ ul {
 }
 
 .drawer-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   width: 100%;
 }
 
+.drawer-button:focus {
+  outline: none;
+}
+
+.account-button:focus {
+  outline: none;
+}
 

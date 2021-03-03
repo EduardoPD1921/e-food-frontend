@@ -11,7 +11,9 @@ const Nav = ({ mainPage }) => {
             return <Menu />
         }
 
-        return <a href="/register" id="login-btn"><span>Entrar</span></a>
+        if (mainPage) {
+            return <a href="/register" id="login-btn"><span>Entrar</span></a>
+        }
     }
 
     return (

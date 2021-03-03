@@ -7,7 +7,9 @@ import List from '@material-ui/core/List'
 // import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 
-import LogOutIcon from '@material-ui/icons/ExitToAppTwoTone';
+import LogOutIcon from '@material-ui/icons/ExitToAppTwoTone'
+import ReceiptIcon from '@material-ui/icons/Receipt'
+import PersonIcon from '@material-ui/icons/Person'
 
 import { red } from '@material-ui/core/colors'
 
@@ -30,16 +32,29 @@ const Menu = props => {
             <React.Fragment>
                 <List className="drawer-section">
                     <ListItem>
-                        
+                        <Button
+                            style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }}
+                            className="drawer-button"
+                            startIcon={<PersonIcon style={{ fill: 'white', fontSize: 25 }} />}
+                            >Perfil
+                        </Button>
+                    </ListItem>
+                    <ListItem>
+                        <Button 
+                            style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }}
+                            className="drawer-button"
+                            startIcon={<ReceiptIcon style={{ fill: 'white', fontSize: 25 }} />}
+                            >Meus pedidos
+                        </Button>
                     </ListItem>
                 </List>
                 <List className="drawer-section drawer-bottom-content">
                     <ListItem>
                         <Button 
-                        onClick={() => logout()}
-                        style={{ color: 'white', textTransform: 'none' }} 
-                        className="drawer-button" 
-                        startIcon={<LogOutIcon style={{ fill: 'white', fontSize: 25 }}
+                            onClick={() => logout()}
+                            style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }} 
+                            className="drawer-button" 
+                            startIcon={<LogOutIcon style={{ fill: 'white', fontSize: 25 }}
                             />}>Sair
                         </Button>
                     </ListItem>
@@ -50,7 +65,12 @@ const Menu = props => {
 
     return (
         <React.Fragment>
-            <Button style={{ marginRight: 10 }} onClick={toggleDrawer(true)}><AccountCircleIcon style={{ fontSize: 30, color: red[700] }} /></Button>
+            <Button 
+                className="account-button"
+                style={{ marginRight: 10 }} 
+                onClick={toggleDrawer(true)}>
+                <AccountCircleIcon style={{ fontSize: 30, color: red[700] }} />
+            </Button>
             <Drawer anchor="right" open={state} onClose={toggleDrawer(false)}>
                 {list()}
             </Drawer>
