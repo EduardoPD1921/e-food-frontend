@@ -7,6 +7,7 @@ import MainPage from '../Pages/MainPage'
 import RegisterPage from '../Pages/RegisterPage'
 import LoginPage from '../Pages/LoginPage'
 import RestaurantRegister from '../Pages/RestaurantRegister'
+import RestaurantLogin from '../Pages/RestaurantLogin'
 
 const Routes = props => {
     const cookie = Cookies.get('token')
@@ -17,7 +18,8 @@ const Routes = props => {
                 <Route path="/" exact component={MainPage} />
                 {!cookie ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
                 {!cookie ? <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
-                <Route path="/restaurant/register" exact component={RestaurantRegister} />
+                {!cookie ? <Route path="/restaurant/register" exact component={RestaurantRegister} /> : <Redirect from="/restaurant/register" to="/" />}
+                <Route path="/restaurant/login" exact component={RestaurantLogin} />
             </Switch>
         </Router>
     )

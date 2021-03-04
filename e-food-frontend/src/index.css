@@ -506,10 +506,10 @@ ul {
 .restaurant-register-form {
   display: flex;
   flex-direction: column;
-  height: 120%;
+  height: 135%;
   width: 30%;
   z-index: 0;
-  margin-top: 10%;
+  margin-top: 14%;
   background-color: whitesmoke;
   border-radius: 8px;
   -webkit-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
