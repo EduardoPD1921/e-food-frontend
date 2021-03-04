@@ -12,6 +12,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront'
 import { red } from '@material-ui/core/colors'
 
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import VMasker from 'vanilla-masker'
 
@@ -35,6 +36,8 @@ const RestaurantRegister = props => {
     const [cityMessage, setCityMessage] = useState('')
     const [stateMessage, setStateMessage] = useState('')
     const [phoneMessage, setPhoneMessage] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false)
     
     const cepMasker = value => {
         const maskedValue = VMasker.toPattern(value, "99999-999")
@@ -69,6 +72,8 @@ const RestaurantRegister = props => {
     }
 
     const onSubmitRegisterFormHandler = () => {
+        setIsLoading(true)
+
         const data = {
             email: email,
             name: name,
@@ -86,8 +91,12 @@ const RestaurantRegister = props => {
             url: 'http://127.0.0.1:8000/api/restaurant/register',
             data: data
         })
-            .then(resp => console.log(resp))
+            .then(resp => {
+                setIsLoading(false)
+                console.log(resp)
+            })
             .catch(error => {
+                setIsLoading(false)
                 onSubmitErrorHandler(error.response.data)
             })
     }
@@ -140,6 +149,23 @@ const RestaurantRegister = props => {
         }
     }
 
+    const renderButton = () => {
+        if (isLoading) {
+            return <CircularProgress color="secondary" />
+        }
+
+        return (
+            <Button
+                onClick={() => onSubmitRegisterFormHandler()} 
+                className="restaurant-form-submit" 
+                color="secondary" 
+                variant="contained" 
+                style={{ textTransform: 'none', marginTop: 20 }}>
+                Cadastrar
+            </Button>
+        )
+    }
+
     return (
         <div className="container-fluid">
             <Nav />
@@ -161,14 +187,7 @@ const RestaurantRegister = props => {
                         <RegisterInput inputValue={city} onChangeTextHandler={onChangeTextHandler} errorMessage={cityMessage} label="Cidade" />
                         <RegisterInput inputValue={state} onChangeTextHandler={onChangeTextHandler} errorMessage={stateMessage} label="Estado" />
                         <RegisterInput inputValue={phone} onChangeTextHandler={phoneMasker} errorMessage={phoneMessage} label="Telefone" />
-                        <Button
-                            onClick={() => onSubmitRegisterFormHandler()} 
-                            className="restaurant-form-submit" 
-                            color="secondary" 
-                            variant="contained" 
-                            style={{ textTransform: 'none', marginTop: 20 }}>
-                            Cadastrar
-                        </Button>
+                        {renderButton()}
                     </div>
                 </div>
             </section>
