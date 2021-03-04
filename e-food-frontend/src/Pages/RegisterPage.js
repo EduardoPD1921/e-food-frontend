@@ -125,7 +125,8 @@ class RegisterPage extends React.Component {
                             <input onChange={e => this.onChangeTextHandler(e, 'password')} className="form-input form-content" type="password" placeholder="Senha"></input>
                             {this.renderLoading()}
                             {this.renderErrorMessage()}
-                            <p>Já possui uma conta? <a href="/login" id="already-has-account">Faça login!</a></p>
+                            <p>Já possui uma conta? <a href="/login" className="more-options">Faça login!</a></p>
+                            <p>Quer cadastrar um restaurante? <a href="/restaurant/register" className="more-options">Cadastre agora!</a></p>
                         </div>
                     </div>
                 </div>

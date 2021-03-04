@@ -333,7 +333,7 @@ input:focus {
   margin-top: 20px;
 }
 
-#already-has-account {
+.more-options {
   color: #ea1d2c;
 }
 
@@ -357,6 +357,10 @@ ul {
 
 .form-submit-button:hover {
   background-color: #c2121f;
+}
+
+.more-options:hover {
+  color: #ea1d2c;
 }
 
 @media only screen and (max-width: 1672px) {
@@ -494,3 +498,47 @@ ul {
   outline: none;
 }
 
+/* Restaurant register */
+.background-animation {
+  position: absolute;
+}
+
+.restaurant-register-form {
+  display: flex;
+  flex-direction: column;
+  height: 120%;
+  width: 30%;
+  z-index: 0;
+  margin-top: 10%;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  -webkit-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
+  -moz-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
+  box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
+}
+
+.restaurant-form-input {
+  width: 40%;
+}
+
+.restaurant-form-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.top-content {
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bottom-content {
+  flex: 6;
+}
+
+.restaurant-form-submit:focus {
+  outline: none;
+}
