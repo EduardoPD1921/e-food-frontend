@@ -23,7 +23,7 @@ const Nav = ({ mainPage }) => {
             </div>
             <div className="nav-right-align">
                 <a href="/" className="header-item">Home</a>
-                <a href="/" className="header-item">Restaurantes</a>
+                <a href="/restaurants" className="header-item">Restaurantes</a>
                 <a href="/" className="header-item">payload</a>
                 {renderLoginButton()}
             </div>
