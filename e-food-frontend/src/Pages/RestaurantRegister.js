@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 import Nav from '../Components/Nav'
 import RegisterInput from '../Components/RegisterInput'
@@ -38,6 +39,7 @@ const RestaurantRegister = props => {
     const [phoneMessage, setPhoneMessage] = useState('')
 
     const [isLoading, setIsLoading] = useState(false)
+    const [redirect, setRedirect] = useState(false)
     
     const cepMasker = value => {
         const maskedValue = VMasker.toPattern(value, "99999-999")
@@ -93,6 +95,8 @@ const RestaurantRegister = props => {
         })
             .then(resp => {
                 setIsLoading(false)
+                localStorage.setItem('registerSuccess', true)
+                setRedirect(true)
                 console.log(resp)
             })
             .catch(error => {
@@ -166,6 +170,12 @@ const RestaurantRegister = props => {
         )
     }
 
+    const redirectToMainPage = () => {
+        if (redirect) {
+            return <Redirect from="/restaurant/register" to="/" />
+        }
+    }
+
     return (
         <div className="container-fluid">
             <Nav />
@@ -192,6 +202,7 @@ const RestaurantRegister = props => {
                     </div>
                 </div>
             </section>
+            {redirectToMainPage()}
         </div>
     )
 }

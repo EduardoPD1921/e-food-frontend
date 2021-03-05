@@ -1,21 +1,13 @@
 import React from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 import Nav from '../Components/Nav'
 
 // Material-ui components
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert from '@material-ui/lab/Alert'
-
 
 import illustration from '../Images/deliver.png'
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />
-}
-
-// let history = useHistory()
 
 class RegisterPage extends React.Component {
     constructor(props) {
@@ -27,7 +19,7 @@ class RegisterPage extends React.Component {
             password: '',
             errorMessage: '',
             isLoading: false,
-            isSnackbarOpen: false
+            redirect: false
         }
     }
 
@@ -51,7 +43,8 @@ class RegisterPage extends React.Component {
             url: 'http://127.0.0.1:8000/api/user/register',
             data: data
         }).then(resp => {
-            this.setState({ isLoading: false, isSnackbarOpen: true, errorMessage: '' })
+            localStorage.setItem('registerSuccess', true)
+            this.setState({ isLoading: false, redirect: true })
         })
         .catch(error => {
             this.errorHandler(error.response.data)
@@ -103,14 +96,15 @@ class RegisterPage extends React.Component {
         }
     }
 
+    redirectToMainPage = () => {
+        if (this.state.redirect) {
+            return <Redirect from="/register" to="/" />
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid">
-                <Snackbar open={this.state.isSnackbarOpen} autoHideDuration={6000} onClose={(event, reason) => this.onCloseSnackbar(event, reason)}>
-                    <Alert onClose={() => this.onCloseSnackbar()} severity="success">
-                        Conta criada com sucesso!
-                    </Alert>
-                </Snackbar>
                 <Nav />
                 <div className="register-page-content">
                     <div className="content-illustration">
@@ -129,6 +123,7 @@ class RegisterPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                {this.redirectToMainPage()}
             </div>
         )
     }
