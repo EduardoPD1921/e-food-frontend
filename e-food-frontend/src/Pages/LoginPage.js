@@ -34,10 +34,15 @@ class LoginPage extends React.Component {
         this.onChangeTextHandler = this.onChangeTextHandler.bind(this)
     }
 
-    onChangeTextHandler(event, type) {
-        this.setState({
-            [type]: event.target.value
-        })
+    onChangeTextHandler(value, type) {
+        switch (type) {
+            case 'Email':
+                return this.setState({ email: value })
+            case 'Senha':
+                return this.setState({ password: value })
+            default:
+                console.log(type)
+        }
     }
 
     onSubmitLoginFormHandler() {
@@ -121,8 +126,8 @@ class LoginPage extends React.Component {
                 <section className="main-content">
                     <div className="login-form">
                         <AccountCircleIcon className="user-img" style={{ fontSize: 100, color: red[600] }} />
-                        <LoginInput onChangeTextHandler={this.onChangeTextHandler} email />
-                        <LoginInput onChangeTextHandler={this.onChangeTextHandler} />
+                        <LoginInput onChangeTextHandler={this.onChangeTextHandler} label="Email" />
+                        <LoginInput onChangeTextHandler={this.onChangeTextHandler} label="Senha" />
                         <button 
                             onClick={() => this.onSubmitLoginFormHandler()}
                             disabled={this.state.isLoading} 

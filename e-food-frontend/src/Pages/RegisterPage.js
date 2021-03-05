@@ -51,7 +51,6 @@ class RegisterPage extends React.Component {
             url: 'http://127.0.0.1:8000/api/user/register',
             data: data
         }).then(resp => {
-            console.log(resp)
             this.setState({ isLoading: false, isSnackbarOpen: true, errorMessage: '' })
         })
         .catch(error => {

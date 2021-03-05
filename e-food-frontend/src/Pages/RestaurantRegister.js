@@ -175,6 +175,7 @@ const RestaurantRegister = props => {
             <section className="main-content">
                 <div className="restaurant-register-form">
                     <div className="top-content restaurant-form-content">
+                        <a href="/restaurant/login" className="enter-as-restaurant">Entrar como um restaurante</a>
                         <StorefrontIcon style={{ color: red[600], fontSize: 100 }} />    
                     </div>
                     <div className="bottom-content restaurant-form-content">
