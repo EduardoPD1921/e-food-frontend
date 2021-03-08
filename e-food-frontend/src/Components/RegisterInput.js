@@ -3,14 +3,26 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 
 const RegisterInput = props => {
+    const getType = () => {
+        if (props.password) {
+            return 'password'
+        }
+
+        if (props.file) {
+            return 'file'
+        }
+
+        return 'text'
+    }
+
     return (
         <TextField 
             value={props.inputValue} 
-            onChange={c => props.onChangeTextHandler(c.target.value, props.label)} 
+            onChange={c => props.onChangeTextHandler(c.target, props.label)} 
             className="restaurant-form-input" 
             style={{ margin: 10 }} 
             label={props.label}
-            type={props.password ? 'password' : 'text'}
+            type={getType()}
             error={props.errorMessage ? true : false}
             helperText={props.errorMessage}
         />

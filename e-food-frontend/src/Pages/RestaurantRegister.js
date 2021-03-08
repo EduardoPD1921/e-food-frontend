@@ -27,6 +27,7 @@ const RestaurantRegister = props => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [phone, setPhone] = useState('')
+    const [image, setImage] = useState({})
 
     const [emailMessage, setEmailMessage] = useState('')
     const [nameMessage, setNameMessage] = useState('')
@@ -37,6 +38,7 @@ const RestaurantRegister = props => {
     const [cityMessage, setCityMessage] = useState('')
     const [stateMessage, setStateMessage] = useState('')
     const [phoneMessage, setPhoneMessage] = useState('')
+    const [imageMessage, setImageMessage] = useState('')
 
     const [isLoading, setIsLoading] = useState(false)
     const [redirect, setRedirect] = useState(false)
@@ -53,22 +55,28 @@ const RestaurantRegister = props => {
         setPhone(maskedValue)
     }
 
-    const onChangeTextHandler = (value, label) => {
+    const onChangeTextHandler = (char, label) => {
         switch (label) {
             case 'Email':
-                return setEmail(value)
+                return setEmail(char.value)
             case 'Nome':
-                return setName(value)
+                return setName(char.value)
             case 'Senha':
-                return setPassword(value)
+                return setPassword(char.value)
             case 'Rua':
-                return setStreet(value)
+                return setStreet(char.value)
             case 'Número':
-                return setNumber(value)
+                return setNumber(char.value)
             case 'Cidade':
-                return setCity(value)
+                return setCity(char.value)
             case 'Estado':
-                return setState(value)
+                return setState(char.value)
+            case 'Imagem':
+                return setImage({
+                    picture: {
+                        pictureAsFile: char.files[0]
+                    }
+                })
             default: console.log(label)
         }
     }
@@ -160,7 +168,7 @@ const RestaurantRegister = props => {
 
         return (
             <Button
-                onClick={() => onSubmitRegisterFormHandler()} 
+                onClick={() => onSubmitRegisterFormHandler()}
                 className="restaurant-form-submit" 
                 color="secondary" 
                 variant="contained" 
@@ -198,6 +206,7 @@ const RestaurantRegister = props => {
                         <RegisterInput inputValue={city} onChangeTextHandler={onChangeTextHandler} errorMessage={cityMessage} label="Cidade" />
                         <RegisterInput inputValue={state} onChangeTextHandler={onChangeTextHandler} errorMessage={stateMessage} label="Estado" />
                         <RegisterInput inputValue={phone} onChangeTextHandler={phoneMasker} errorMessage={phoneMessage} label="Telefone" />
+                        <RegisterInput file inputValue={''} onChangeTextHandler={onChangeTextHandler} errorMessage={imageMessage} label="Imagem" />
                         {renderButton()}
                     </div>
                 </div>
