@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import Nav from '../Components/Nav'
+import Nav from '../../Components/Nav'
 
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'

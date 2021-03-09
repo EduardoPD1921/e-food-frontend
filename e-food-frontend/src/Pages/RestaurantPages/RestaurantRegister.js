@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
-import Nav from '../Components/Nav'
-import RegisterInput from '../Components/RegisterInput'
+import Nav from '../../Components/Nav'
+import RegisterInput from '../../Components/RegisterInput'
 
 import Lottie from 'react-lottie'
-import backgroundAnimation2 from '../Animations/backgroundAnimation2.json'
+import backgroundAnimation2 from '../../Animations/backgroundAnimation2.json'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 

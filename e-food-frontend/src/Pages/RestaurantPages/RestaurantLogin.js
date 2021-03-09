@@ -4,8 +4,8 @@ import Cookies from 'js-cookie'
 
 import { Redirect } from 'react-router-dom'
 
-import Nav from '../Components/Nav'
-import LoginInput from '../Components/LoginInput'
+import Nav from '../../Components/Nav'
+import LoginInput from '../../Components/LoginInput'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 import CircularProgress from '@material-ui/core/CircularProgress'

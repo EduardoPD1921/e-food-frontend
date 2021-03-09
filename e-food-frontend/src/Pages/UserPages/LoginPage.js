@@ -10,8 +10,8 @@ import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
 import { red } from '@material-ui/core/colors'
 
-import Nav from '../Components/Nav'
-import LoginInput from '../Components/LoginInput'
+import Nav from '../../Components/Nav'
+import LoginInput from '../../Components/LoginInput'
 import axios from 'axios'
 
 function Alert(props) {

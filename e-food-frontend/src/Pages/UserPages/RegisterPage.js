@@ -2,12 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
-import Nav from '../Components/Nav'
+import Nav from '../../Components/Nav'
 
 // Material-ui components
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import illustration from '../Images/deliver.png'
+import illustration from '../../Images/deliver.png'
 
 class RegisterPage extends React.Component {
     constructor(props) {
