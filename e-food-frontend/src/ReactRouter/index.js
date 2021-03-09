@@ -11,16 +11,17 @@ import RestaurantLogin from '../Pages/RestaurantLogin'
 import RestaurantsPage from '../Pages/RestaurantsPage'
 
 const Routes = props => {
-    const cookie = Cookies.get('token')
+    const userToken = Cookies.get('userToken')
+    const restaurantToken = Cookies.get('restaurantToken')
 
     return (
         <Router>
             <Switch>
                 <Route path="/" exact component={MainPage} />
-                {!cookie ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
-                {!cookie ? <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
-                {!cookie ? <Route path="/restaurant/register" exact component={RestaurantRegister} /> : <Redirect from="/restaurant/register" to="/" />}
-                {!cookie ? <Route path="/restaurant/login" exact component={RestaurantLogin} /> : <Redirect from="/restaurant/login" to="/" />}
+                {!userToken || restaurantToken ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
+                {!userToken || restaurantToken ? <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
+                {!userToken || restaurantToken ? <Route path="/restaurant/register" exact component={RestaurantRegister} /> : <Redirect from="/restaurant/register" to="/" />}
+                {!userToken || restaurantToken ? <Route path="/restaurant/login" exact component={RestaurantLogin} /> : <Redirect from="/restaurant/login" to="/" />}
                 <Route path="/restaurants" exact component={RestaurantsPage} />
             </Switch>
         </Router>

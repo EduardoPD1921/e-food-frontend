@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
             data: data
         })
             .then(resp => {
-                Cookies.set('token', resp.data.token, { secure: true })
+                Cookies.set('userToken', resp.data.token, { secure: true })
 
                 this.setState({ isLoading: false, errorMessage: '', redirect: true })
             })

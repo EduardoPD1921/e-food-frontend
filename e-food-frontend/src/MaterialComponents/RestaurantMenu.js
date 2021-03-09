@@ -4,18 +4,15 @@ import Cookies from 'js-cookie'
 import Drawer from '@material-ui/core/Drawer'
 import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
-// import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 
+import StoreIcon from '@material-ui/icons/Store'
 import LogOutIcon from '@material-ui/icons/ExitToAppTwoTone'
 import ReceiptIcon from '@material-ui/icons/Receipt'
-import PersonIcon from '@material-ui/icons/Person'
 
 import { red } from '@material-ui/core/colors'
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-
-const Menu = props => {
+const RestaurantMenu = props => {
     const [state, setState] = React.useState(false)
 
     const toggleDrawer = (open) => (event) => {
@@ -23,7 +20,7 @@ const Menu = props => {
     }
 
     const logout = () => {
-        Cookies.remove('token')
+        Cookies.remove('restaurantToken')
         window.location.reload()
     }
 
@@ -35,7 +32,7 @@ const Menu = props => {
                         <Button
                             style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }}
                             className="drawer-button"
-                            startIcon={<PersonIcon style={{ fill: 'white', fontSize: 25 }} />}
+                            startIcon={<StoreIcon style={{ fill: 'white', fontSize: 25 }} />}
                             >Perfil
                         </Button>
                     </ListItem>
@@ -44,7 +41,7 @@ const Menu = props => {
                             style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }}
                             className="drawer-button"
                             startIcon={<ReceiptIcon style={{ fill: 'white', fontSize: 25 }} />}
-                            >Meus pedidos
+                            >Pedidos
                         </Button>
                     </ListItem>
                 </List>
@@ -69,7 +66,7 @@ const Menu = props => {
                 className="account-button"
                 style={{ marginRight: 10 }} 
                 onClick={toggleDrawer(true)}>
-                <AccountCircleIcon style={{ fontSize: 30, color: red[700] }} />
+                <StoreIcon style={{ fontSize: 30, color: red[700] }} />
             </Button>
             <Drawer anchor="right" open={state} onClose={toggleDrawer(false)}>
                 {list()}
@@ -78,4 +75,4 @@ const Menu = props => {
     )
 }
 
-export default Menu
+export default RestaurantMenu

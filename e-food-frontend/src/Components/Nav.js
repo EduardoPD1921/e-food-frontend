@@ -1,14 +1,20 @@
 import React from 'react'
 import Cookies from 'js-cookie'
 
-import Menu from '../MaterialComponents/Menu'
+import UserMenu from '../MaterialComponents/UserMenu'
+import RestaurantMenu from '../MaterialComponents/RestaurantMenu'
 
 const Nav = ({ mainPage }) => {
-    const cookie = Cookies.get('token')
+    const userToken = Cookies.get('userToken')
+    const restaurantToken = Cookies.get('restaurantToken')
 
     const renderLoginButton = () => {
-        if (cookie) {
-            return <Menu />
+        if (userToken) {
+            return <UserMenu />
+        }
+
+        if (restaurantToken) {
+            return <RestaurantMenu />
         }
 
         if (mainPage) {
