@@ -20,7 +20,7 @@ const Routes = props => {
                 {!cookie ? <Route path="/register" exact component={RegisterPage} /> : <Redirect from="/register" to="/" />}
                 {!cookie ? <Route path="/login" exact component={LoginPage} /> : <Redirect from="/login" to="/" />}
                 {!cookie ? <Route path="/restaurant/register" exact component={RestaurantRegister} /> : <Redirect from="/restaurant/register" to="/" />}
-                <Route path="/restaurant/login" exact component={RestaurantLogin} />
+                {!cookie ? <Route path="/restaurant/login" exact component={RestaurantLogin} /> : <Redirect from="/restaurant/login" to="/" />}
                 <Route path="/restaurants" exact component={RestaurantsPage} />
             </Switch>
         </Router>

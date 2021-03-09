@@ -565,3 +565,8 @@ ul {
   -moz-box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
   box-shadow: 2px 3px 19px -6px rgba(122,122,122,1);
 }
+
+/* All restaurants page */
+.restaurant-card {
+  margin-bottom: 30px;
+}

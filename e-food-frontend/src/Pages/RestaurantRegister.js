@@ -27,7 +27,6 @@ const RestaurantRegister = props => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [phone, setPhone] = useState('')
-    const [image, setImage] = useState({})
 
     const [emailMessage, setEmailMessage] = useState('')
     const [nameMessage, setNameMessage] = useState('')
@@ -38,19 +37,18 @@ const RestaurantRegister = props => {
     const [cityMessage, setCityMessage] = useState('')
     const [stateMessage, setStateMessage] = useState('')
     const [phoneMessage, setPhoneMessage] = useState('')
-    const [imageMessage, setImageMessage] = useState('')
 
     const [isLoading, setIsLoading] = useState(false)
     const [redirect, setRedirect] = useState(false)
     
-    const cepMasker = value => {
-        const maskedValue = VMasker.toPattern(value, "99999-999")
+    const cepMasker = char => {
+        const maskedValue = VMasker.toPattern(char.value, "99999-999")
 
         setCep(maskedValue)
     }
 
-    const phoneMasker = value => {
-        const maskedValue = VMasker.toPattern(value, "(99) 99999-9999")
+    const phoneMasker = char => {
+        const maskedValue = VMasker.toPattern(char.value, "(99) 99999-9999")
 
         setPhone(maskedValue)
     }
@@ -71,12 +69,6 @@ const RestaurantRegister = props => {
                 return setCity(char.value)
             case 'Estado':
                 return setState(char.value)
-            case 'Imagem':
-                return setImage({
-                    picture: {
-                        pictureAsFile: char.files[0]
-                    }
-                })
             default: console.log(label)
         }
     }
@@ -84,17 +76,17 @@ const RestaurantRegister = props => {
     const onSubmitRegisterFormHandler = () => {
         setIsLoading(true)
 
-        const data = {
-            email: email,
-            name: name,
-            password: password,
-            street: street,
-            number: number,
-            cep: cep,
-            city: city,
-            state: state,
-            phone_number: phone
-        }
+        const data = new FormData()
+
+        data.append('email', email)
+        data.append('name', name)
+        data.append('password', password)
+        data.append('street', street)
+        data.append('number', number)
+        data.append('cep', cep)
+        data.append('city', city)
+        data.append('state', state)
+        data.append('phone_number', phone)
 
         axios({
             method: 'POST',
@@ -206,7 +198,6 @@ const RestaurantRegister = props => {
                         <RegisterInput inputValue={city} onChangeTextHandler={onChangeTextHandler} errorMessage={cityMessage} label="Cidade" />
                         <RegisterInput inputValue={state} onChangeTextHandler={onChangeTextHandler} errorMessage={stateMessage} label="Estado" />
                         <RegisterInput inputValue={phone} onChangeTextHandler={phoneMasker} errorMessage={phoneMessage} label="Telefone" />
-                        <RegisterInput file inputValue={''} onChangeTextHandler={onChangeTextHandler} errorMessage={imageMessage} label="Imagem" />
                         {renderButton()}
                     </div>
                 </div>

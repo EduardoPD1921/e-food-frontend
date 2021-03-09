@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 import { Redirect } from 'react-router-dom'
 
@@ -52,6 +53,8 @@ const RestaurantLogin = props => {
             data: data
         })
             .then(resp => {
+                Cookies.set('restaurantToken', resp.data.token, { secure: true })
+
                 setIsloading(false)
                 setRedirect(true)
             })
