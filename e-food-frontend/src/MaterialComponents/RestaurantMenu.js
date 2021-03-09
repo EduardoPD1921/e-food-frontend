@@ -30,6 +30,7 @@ const RestaurantMenu = props => {
                 <List className="drawer-section">
                     <ListItem>
                         <Button
+                            href="/restaurant/profile"
                             style={{ color: 'white', textTransform: 'none', justifyContent: 'flex-start' }}
                             className="drawer-button"
                             startIcon={<StoreIcon style={{ fill: 'white', fontSize: 25 }} />}
