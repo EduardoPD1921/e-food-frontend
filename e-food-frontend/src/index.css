@@ -53,6 +53,10 @@ nav {
   font-size: 20px;
 }
 
+.nav-profile-page {
+  background-color: #5f56e3; 
+}
+
 .nav-right-align {
   display: flex;
   flex: 1;
@@ -77,8 +81,19 @@ nav {
   transition: 0.1s;
 }
 
+.header-item-restaurant {
+  margin: 20px 20px;
+  color: whitesmoke;
+  text-decoration: none;
+  transition: 0.1s;
+}
+
 .header-item:hover {
   color: #ea1d2c;
+}
+
+.header-item-restaurant:hover {
+  color: white;
 }
 
 #login-btn {

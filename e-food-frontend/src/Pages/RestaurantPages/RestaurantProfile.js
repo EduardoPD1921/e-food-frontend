@@ -19,7 +19,7 @@ class RestaurantProfile extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <Nav />
+                <Nav profilePage />
                 <div className="main-content">
                     <div className="restaurant-profile-info">
                         <div className="left-content">

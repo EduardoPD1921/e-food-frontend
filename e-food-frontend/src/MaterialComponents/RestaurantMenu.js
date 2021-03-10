@@ -67,7 +67,7 @@ const RestaurantMenu = props => {
                 className="account-button"
                 style={{ marginRight: 10 }} 
                 onClick={toggleDrawer(true)}>
-                <StoreIcon style={{ fontSize: 30, color: red[700] }} />
+                <StoreIcon style={{ fontSize: 30, color: props.profilePage ? "white" : red[700] }} />
             </Button>
             <Drawer anchor="right" open={state} onClose={toggleDrawer(false)}>
                 {list()}
