@@ -1,10 +1,8 @@
 import React from 'react'
 
-import Button from '@material-ui/core/Button'
-
-import InstagramIcon from '@material-ui/icons/Instagram'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import GitHubIcon from '@material-ui/icons/GitHub'
+import InstagramButton from './Buttons/InstagramButton'
+import TwitterButton from './Buttons/TwitterButton'
+import GithubButton from './Buttons/GithubButton'
 
 const ProjectInfo = props => {
     return (
@@ -12,15 +10,9 @@ const ProjectInfo = props => {
             <a href="/" className="footer-logo">E-food</a>
             <p>E-food é um projeto de estudo de tecnologias relacionadas ao desenvolvimento frontend e backend</p>
             <div className="social-media">
-                <Button href="https://www.instagram.com/eduardo_gomes_heleno/">
-                    <InstagramIcon />
-                </Button>
-                <Button href="https://twitter.com/duardoheleno">
-                    <TwitterIcon />
-                </Button>
-                <Button href="https://github.com/EduardoPD1921">
-                    <GitHubIcon />
-                </Button>
+                <InstagramButton class="media-icon" />
+                <TwitterButton class="media-icon" />
+                <GithubButton class="media-icon" />
             </div>
         </React.Fragment>
     )

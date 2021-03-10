@@ -12,6 +12,8 @@ import { red } from '@material-ui/core/colors'
 
 import Nav from '../../Components/Nav'
 import LoginInput from '../../Components/LoginInput'
+import Footer from '../../Components/Footer/Footer'
+
 import axios from 'axios'
 
 function Alert(props) {
@@ -137,6 +139,7 @@ class LoginPage extends React.Component {
                         {this.renderErrorMessage()}
                     </div>
                 </section>
+                <Footer />
                 {this.redirectToMainPage()}
             </div>
         )

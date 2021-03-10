@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
 import Nav from '../../Components/Nav'
+import Footer from '../../Components/Footer/Footer'
 
 // Material-ui components
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -123,6 +124,7 @@ class RegisterPage extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
                 {this.redirectToMainPage()}
             </div>
         )

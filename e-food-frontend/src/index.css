@@ -611,8 +611,14 @@ ul {
 
 .footer-column {
   display: flex;
+  flex: 1;
   flex-direction: column;
   margin: 30px;
+}
+
+.footer-row {
+  display: flex;
+  flex-direction: row;
 }
 
 .footer-logo {
@@ -630,13 +636,40 @@ ul {
   justify-content: center;
 }
 
-.footer-column p {
+.info-title {
+  color: #0d0c22;
+  margin-bottom: 8px;
+}
+
+.info-option {
+  text-decoration: none;
   font-size: 15px;
+  color: #888893;
+  margin-bottom: 5px;
+  transition: 0.1s;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
+.info-option:hover {
+  color: #515060;
+}
+
+.footer-column p {
+  font-size: 14px;
   width: 40%;
 }
 
 .footer-logo:hover {
   color: #c2121f;
+}
+
+.media-icon:hover {
+  color: #ea1d2c;
 }
 
 

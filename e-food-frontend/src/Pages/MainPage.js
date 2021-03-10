@@ -3,6 +3,7 @@ import React from 'react'
 import Nav from '../Components/Nav'
 import Header from '../Components/Header'
 import Notification from '../MaterialComponents/Notification'
+import Footer from '../Components/Footer/Footer'
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class MainPage extends React.Component {
                 <Nav mainPage={true} />
                 <Header />
                 <Notification onCloseSnackbar={this.onCloseSnackbar} isSnackbarOpen={this.state.isSnackbarOpen} />
+                <Footer />
             </div>
         )
     }

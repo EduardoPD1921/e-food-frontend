@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import Nav from '../../Components/Nav'
 import LoginInput from '../../Components/LoginInput'
+import Footer from '../../Components/Footer/Footer'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -110,6 +111,7 @@ const RestaurantLogin = props => {
                     {renderButton()}
                 </div>
             </section>
+            <Footer />
             {redirectToMainPage()}
         </div>
     )
