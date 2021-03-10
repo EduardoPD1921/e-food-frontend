@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Nav from '../../Components/Nav'
-import Footer from '../../Components/Footer'
+import Footer from '../../Components/Footer/Footer'
 
 import StoreIcon from '@material-ui/icons/Store'
 
@@ -30,6 +30,7 @@ class RestaurantProfile extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

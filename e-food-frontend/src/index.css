@@ -601,3 +601,44 @@ ul {
   /* background-color: red; */
 }
 
+/* Footer */
+.footer {
+  display: flex;
+  flex-direction: row;
+  background-color: #fafafb;
+  padding: 2% 5% 5% 8%;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.footer-logo {
+  text-decoration: none;
+  color: #ea1d2c;
+  font-size: 30px;
+  width: 7vw;
+  margin-bottom: 10px;
+  transition: 0.1s;
+}
+
+.social-media {
+  display: flex;
+  width: 35%;
+  justify-content: center;
+}
+
+.footer-column p {
+  font-size: 15px;
+  width: 40%;
+}
+
+.footer-logo:hover {
+  color: #c2121f;
+}
+
+
+
+
