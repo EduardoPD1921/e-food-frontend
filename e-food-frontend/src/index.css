@@ -54,7 +54,10 @@ nav {
 }
 
 .nav-profile-page {
-  background-color: #5f56e3; 
+  background-color: #5f56e3;
+  height: 40%; 
+  align-items: flex-start;
+  position: relative;
 }
 
 .nav-right-align {
@@ -587,33 +590,45 @@ ul {
 }
 
 /* RestaurantProfile */
+/* .restaurant-profile-info {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 50%;
+  margin-top: -50px;
+  border-radius: 10px;
+  overflow: hidden;
+} */
+
 .restaurant-profile-info {
   display: flex;
   flex-direction: row;
-  z-index: 0;
   width: 50%;
-  height: 60%;
-  background-color: rgba(232,219,219,0.9);
-  border-radius: 8px;
+  border-radius: 10px;
+  /* overflow: hidden; */
 }
 
 .left-content {
   display: flex;
-  flex: 1;
   flex-direction: column;
+  flex: 2;
+  background-color: black;
   align-items: center;
-  border-right-style: solid;
-  border-right-color: silver;
-  border-right-width: 1px;
-  /* border-right-width: 2px;
-  border-right-color: black;
-  border-right-style: solid; */
-  /* background-color: black; */
 }
 
 .right-content {
-  flex: 5;
-  /* background-color: red; */
+  flex: 3;
+  background-color: red;
+  color: white;
+}
+
+.restaurant-profile-screen {
+  display: flex;
+  justify-content: center;
+}
+
+.store-icon {
+  margin-top: 10px;
 }
 
 /* Footer */

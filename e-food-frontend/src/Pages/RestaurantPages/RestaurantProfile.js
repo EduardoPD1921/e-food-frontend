@@ -5,7 +5,7 @@ import Footer from '../../Components/Footer/Footer'
 
 import StoreIcon from '@material-ui/icons/Store'
 
-import { red } from '@material-ui/core/colors'
+// import { red } from '@material-ui/core/colors'
 
 class RestaurantProfile extends React.Component {
     constructor(props) {
@@ -20,10 +20,10 @@ class RestaurantProfile extends React.Component {
         return (
             <div className="container-fluid">
                 <Nav profilePage />
-                <div className="main-content">
+                <div className="restaurant-profile-screen">
                     <div className="restaurant-profile-info">
                         <div className="left-content">
-                            <StoreIcon style={{ color: red[600], fontSize: 100 }} />
+                            <StoreIcon className="store-icon" style={{ color: 'white', fontSize: 100 }} />
                         </div>
                         <div className="right-content">
                             test
