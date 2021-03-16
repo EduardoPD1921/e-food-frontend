@@ -621,10 +621,10 @@ ul {
   display: flex;
   flex: 3;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   border-radius: 0 10px 10px 0;
   background-color: rgb(250, 250, 250);
-  padding-top: 20px;
 }
 
 .info-row {

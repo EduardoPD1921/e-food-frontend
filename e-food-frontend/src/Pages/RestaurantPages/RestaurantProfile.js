@@ -6,6 +6,8 @@ import Nav from '../../Components/Nav'
 import Footer from '../../Components/Footer/Footer'
 import InfoRow from '../../Components/InfoRow'
 
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 import StorefrontIcon from '@material-ui/icons/Storefront'
 
 class RestaurantProfile extends React.Component {
@@ -13,11 +15,13 @@ class RestaurantProfile extends React.Component {
         super(props)
 
         this.state = {
-            profileInfo: {}
+            profileInfo: {},
+            isLoading: false,
         }
     }
 
     componentDidMount() {
+        this.setState({ isLoading: true })
         const tokenAuth = Cookies.get('restaurantToken')
 
         axios({
@@ -28,9 +32,27 @@ class RestaurantProfile extends React.Component {
             }
         })
             .then(resp => {
-                this.setState({ profileInfo: resp.data })
+                this.setState({ profileInfo: resp.data, isLoading: false })
             })
             .catch(error => console.log(error.response))
+    }
+
+    renderProfileInfo = () => {
+        if (this.state.isLoading) {
+            return <CircularProgress style={{ color: '#5f56e3'}} />
+        }
+
+        return (
+            <React.Fragment>
+                <InfoRow index="Nome" value={this.state.profileInfo.name} background />
+                <InfoRow index="Email" value={this.state.profileInfo.email} />
+                <InfoRow index="Rua" value={this.state.profileInfo.street} background />
+                <InfoRow index="Número" value={this.state.profileInfo.number} />
+                <InfoRow index="Cidade" value={this.state.profileInfo.city} background />
+                <InfoRow index="Estado" value={this.state.profileInfo.state} />
+                <InfoRow index="Telefone" value={this.state.profileInfo.phone_number} background />
+            </React.Fragment>
+        )
     }
 
     render() {
@@ -45,13 +67,7 @@ class RestaurantProfile extends React.Component {
                             <span className="secondary-text">{this.state.profileInfo.email}</span>
                         </div>
                         <div className="profile-info">
-                            <InfoRow index="Nome" value={this.state.profileInfo.name} background />
-                            <InfoRow index="Email" value={this.state.profileInfo.email} />
-                            <InfoRow index="Rua" value={this.state.profileInfo.street} background />
-                            <InfoRow index="Número" value={this.state.profileInfo.number} />
-                            <InfoRow index="Cidade" value={this.state.profileInfo.city} background />
-                            <InfoRow index="Estado" value={this.state.profileInfo.state} />
-                            <InfoRow index="Telefone" value={this.state.profileInfo.phone_number} background />
+                            {this.renderProfileInfo()}
                         </div>
                     </div>
                 </div>
