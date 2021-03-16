@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 import Nav from '../../Components/Nav'
 import Footer from '../../Components/Footer/Footer'
-import RowInfo from '../../Components/RowInfo'
+import InfoRow from '../../Components/InfoRow'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 
@@ -45,7 +45,13 @@ class RestaurantProfile extends React.Component {
                             <span className="secondary-text">{this.state.profileInfo.email}</span>
                         </div>
                         <div className="profile-info">
-                            <RowInfo />
+                            <InfoRow index="Nome" value={this.state.profileInfo.name} background />
+                            <InfoRow index="Email" value={this.state.profileInfo.email} />
+                            <InfoRow index="Rua" value={this.state.profileInfo.street} background />
+                            <InfoRow index="Número" value={this.state.profileInfo.number} />
+                            <InfoRow index="Cidade" value={this.state.profileInfo.city} background />
+                            <InfoRow index="Estado" value={this.state.profileInfo.state} />
+                            <InfoRow index="Telefone" value={this.state.profileInfo.phone_number} background />
                         </div>
                     </div>
                 </div>

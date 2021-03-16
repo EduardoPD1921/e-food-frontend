@@ -620,8 +620,37 @@ ul {
 .profile-info {
   display: flex;
   flex: 3;
+  align-items: center;
   flex-direction: column;
   border-radius: 0 10px 10px 0;
+  background-color: rgb(250, 250, 250);
+  padding-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.info-row-item {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.row-index {
+  color: rgb(112, 112, 112);
+}
+
+.row-value {
+  font-weight: 500;
+}
+
+.row-background-active {
+  background-color: #edf1f3;
 }
 
 .main-text {
