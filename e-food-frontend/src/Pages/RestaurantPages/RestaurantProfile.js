@@ -10,12 +10,40 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 
+//aba navigation test
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
+import HelpIcon from '@material-ui/icons/Help'
+
+function TabPanel(props) {
+    const { children, value, index } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`scrollable-force-tabpanel-${index}`}
+            aria-labelledby={`scrollable-force-tab-${index}`}
+        >
+            {value === index && (
+                <Box>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    )
+}
+
 class RestaurantProfile extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
             profileInfo: {},
+            tabPosition: 0,
             isLoading: false,
         }
     }
@@ -35,6 +63,10 @@ class RestaurantProfile extends React.Component {
                 this.setState({ profileInfo: resp.data, isLoading: false })
             })
             .catch(error => console.log(error.response))
+    }
+
+    handleChange = newValue => {
+        this.setState({ tabPosition: newValue })
     }
 
     renderProfileInfo = () => {
@@ -60,7 +92,7 @@ class RestaurantProfile extends React.Component {
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
                 <Nav profilePage />
                 <div className="restaurant-profile-content">
-                    <div className="restaurant-profile-info">
+                    {/* <div className="restaurant-profile-info">
                         <div className="pre-info">
                             <StorefrontIcon style={{ color: "#5f56e3", fontSize: 100, marginBottom: 10 }} />
                             <span className="main-text">{this.state.profileInfo.name}</span>
@@ -69,7 +101,42 @@ class RestaurantProfile extends React.Component {
                         <div className="profile-info">
                             {this.renderProfileInfo()}
                         </div>
-                    </div>
+                    </div> */}
+                    <AppBar position="static" color="default">
+                        <Tabs
+                            value={this.state.tabPosition}
+                            onChange={(event, newValue) => this.handleChange(newValue)}
+                            variant="fullWidth"
+                            scrollButtons="on"
+                            indicatorColor="primary"
+                            textColor="primary"
+                            aria-label="scrollable force tabs example"
+                            centered={true}
+                        >
+                            <Tab label="Item One" icon={<HelpIcon />} />
+                            <Tab label="Item Two" icon={<HelpIcon />} />
+                            <Tab label="Item Three" icon={<HelpIcon />} />
+
+                        </Tabs>
+                    </AppBar>
+                    <TabPanel value={this.state.tabPosition} index={0}>
+                        <div className="restaurant-profile-info">
+                            <div className="pre-info">
+                                <StorefrontIcon style={{ color: "#5f56e3", fontSize: 100, marginBottom: 10 }} />
+                                <span className="main-text">{this.state.profileInfo.name}</span>
+                                <span className="secondary-text">{this.state.profileInfo.email}</span>
+                            </div>
+                            <div className="profile-info">
+                                {this.renderProfileInfo()}
+                            </div>
+                        </div>
+                    </TabPanel>
+                    <TabPanel value={this.state.tabPosition} index={1}>
+                        Test2
+                    </TabPanel>
+                    <TabPanel value={this.state.tabPosition} index={2}>
+                        Test3
+                    </TabPanel>
                 </div>
                 <Footer />
             </div>

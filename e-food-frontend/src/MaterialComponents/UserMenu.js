@@ -23,7 +23,7 @@ const UserMenu = props => {
     }
 
     const logout = () => {
-        Cookies.remove('token')
+        Cookies.remove('userToken')
         window.location.reload()
     }
 
