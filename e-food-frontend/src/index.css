@@ -597,7 +597,15 @@ ul {
   align-items: center;
 }
 
-.restaurant-profile-info {
+.test {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+/* .restaurant-profile-info {
   display: flex;
   flex-direction: row;
   margin: -120px 0 100px 0;
@@ -606,6 +614,16 @@ ul {
   width: 50%;
   height: 500px;
   border-radius: 10px;
+} */
+
+.restaurant-profile-info {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 500px;
+  border-radius: 0 0 10px 10px;
 }
 
 .pre-info {
@@ -614,7 +632,7 @@ ul {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px 0 0 10px;
+  /* border-radius: 0 0 0 10px; */
 }
 
 .profile-info {
@@ -668,6 +686,7 @@ ul {
   flex-direction: row;
   background-color: #fafafb;
   padding: 2% 5% 5% 8%;
+  margin-top: 100px;
 }
 
 .footer-column {
