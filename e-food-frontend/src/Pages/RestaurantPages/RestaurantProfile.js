@@ -16,6 +16,7 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Box from '@material-ui/core/Box'
 import HelpIcon from '@material-ui/icons/Help'
+import EditIcon from '@material-ui/icons/Edit'
 
 function TabPanel(props) {
     const { children, value, index } = props;
@@ -28,7 +29,7 @@ function TabPanel(props) {
             aria-labelledby={`scrollable-force-tab-${index}`}
         >
             {value === index && (
-                <Box style={{ width: '96.5vh' }}>
+                <Box style={{ width: '99vh' }}>
                     {children}
                 </Box>
             )}
@@ -42,8 +43,10 @@ class RestaurantProfile extends React.Component {
 
         this.state = {
             profileInfo: {},
+            emailEdit: '',
+            nameEdit: '',
             tabPosition: 0,
-            isLoading: false,
+            isLoading: false
         }
     }
 
@@ -59,7 +62,13 @@ class RestaurantProfile extends React.Component {
             }
         })
             .then(resp => {
-                this.setState({ profileInfo: resp.data, isLoading: false })
+                // this.setState({ profileInfo: resp.data, isLoading: false })
+                this.setState({
+                    profileInfo: resp.data,
+                    emailEdit: resp.data.email,
+                    nameEdit: resp.data.name,
+                    isLoading: false
+                })
             })
             .catch(error => console.log(error.response))
     }
@@ -86,6 +95,17 @@ class RestaurantProfile extends React.Component {
         )
     }
 
+    handleEditInputChange = (type, value) => {
+        switch(type) {
+            case 'email':
+                return this.setState({ emailEdit: value })
+            case 'name':
+                return this.setState({ nameEdit: value })
+            default:
+                console.log(type)
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
@@ -101,7 +121,7 @@ class RestaurantProfile extends React.Component {
                             {this.renderProfileInfo()}
                         </div>
                     </div> */}
-                    <div className="test">
+                    <div className="appbar-container">
                         <AppBar style={{ borderRadius: 10, marginTop: -120 }} position="static" color="default">
                             <Tabs
                                 // style={{ marginTop: -100 }}
@@ -114,14 +134,13 @@ class RestaurantProfile extends React.Component {
                                 aria-label="scrollable force tabs example"
                                 centered
                             >
-                                <Tab label="Perfil" icon={<StorefrontIcon />} />
-                                <Tab label="Item Two" icon={<HelpIcon />} />
+                                <Tab style={{ textTransform: 'none', fontWeight: '600' }} label="Perfil" icon={<StorefrontIcon />} />
+                                <Tab style={{ textTransform: 'none', fontWeight: '600' }} label="Editar perfil" icon={<EditIcon />} />
                                 <Tab label="Item Three" icon={<HelpIcon />} />
-
                             </Tabs>
                         </AppBar>
                         <TabPanel value={this.state.tabPosition} index={0}>
-                            <div className="restaurant-profile-info">
+                            <div className="restaurant-profile-item">
                                 <div className="pre-info">
                                     <StorefrontIcon style={{ color: "#5f56e3", fontSize: 100, marginBottom: 10 }} />
                                     <span className="main-text">{this.state.profileInfo.name}</span>
@@ -133,7 +152,21 @@ class RestaurantProfile extends React.Component {
                             </div>
                         </TabPanel>
                         <TabPanel value={this.state.tabPosition} index={1}>
-                            Test2
+                            <div className="restaurant-profile-item">
+                                <div className="restaurant-profile-section restaurant-profile-section-taller">
+                                    <h3 className="section-title">Informações do perfil</h3>
+                                    <div className="edit-profile-item">
+                                        <div className="form-floating mb-3 form-edit">
+                                            <input onChange={char => this.handleEditInputChange('email', char.target.value)} type="email" className="form-control edit-input" id="floatingInput" placeholder="Email" value={this.state.emailEdit} />
+                                            <label htmlFor="floatingInput">Email</label>
+                                        </div>
+                                        <div className="form-floating mb-3 form-edit">
+                                            <input onChange={char => this.handleEditInputChange('name', char.target.value)} type="text" className="form-control edit-input" id="restaurantName" placeholder="Nome do restaurante" value={this.state.nameEdit} />
+                                            <label htmlFor="restaurantName">Nome do restaurante</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </TabPanel>
                         <TabPanel value={this.state.tabPosition} index={2}>
                             Test3
