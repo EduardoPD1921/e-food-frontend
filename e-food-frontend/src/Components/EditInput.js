@@ -4,7 +4,7 @@ const EditInput = props => {
     return (
         <div className="form-floating mb-3 form-edit">
             <input
-                onChange={char => props.handleEditInputChange(props.inputType, char.target.value)} 
+                onChange={char => props.handleEditInputChange(char.target.value, props.inputType)} 
                 type={props.type} 
                 className="form-control edit-input" 
                 id={props.id} 

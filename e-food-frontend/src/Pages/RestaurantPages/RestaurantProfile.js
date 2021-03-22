@@ -13,6 +13,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
 
+import VMasker from 'vanilla-masker'
+
 class RestaurantProfile extends React.Component {
     constructor(props) {
         super(props)
@@ -24,6 +26,8 @@ class RestaurantProfile extends React.Component {
             streetEdit: '',
             numberEdit: '',
             cityEdit: '',
+            stateEdit: '',
+            phoneEdit: '',
             tabPosition: 0,
             isLoading: false
         }
@@ -49,6 +53,8 @@ class RestaurantProfile extends React.Component {
                     streetEdit: resp.data.street,
                     numberEdit: resp.data.number,
                     cityEdit: resp.data.city,
+                    stateEdit: resp.data.state,
+                    phoneEdit: resp.data.phone_number,
                     isLoading: false
                 })
             })
@@ -77,7 +83,7 @@ class RestaurantProfile extends React.Component {
         )
     }
 
-    handleEditInputChange = (type, value) => {
+    handleEditInputChange = (value, type) => {
         switch(type) {
             case 'email':
                 return this.setState({ emailEdit: value })
@@ -89,9 +95,19 @@ class RestaurantProfile extends React.Component {
                 return this.setState({ numberEdit: value })
             case 'city':
                 return this.setState({ cityEdit: value })
+            case 'state':
+                return this.setState({ stateEdit: value })
+            case 'phone':
+                return this.setState({ phoneEdit: value })
             default:
                 console.log(type)
         }
+    }
+
+    phoneMasker = value => {
+        const maskedPhone = VMasker.toPattern(value, "(99) 99999-9999")
+
+        this.setState({ phoneEdit: maskedPhone })
     }
 
     render() {
@@ -114,7 +130,7 @@ class RestaurantProfile extends React.Component {
                                 </div>
                             </TabContent>
                             <TabContent tabPosition={this.state.tabPosition} index={1}>
-                                <div style={{ height: 700 }} className="restaurant-profile-item">
+                                <div style={{ height: 900 }} className="restaurant-profile-item">
                                     <div className="restaurant-profile-section">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
@@ -134,42 +150,50 @@ class RestaurantProfile extends React.Component {
                                                 value={this.state.nameEdit}
                                                 inputType="name"
                                             />
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange} 
+                                                type="text"
+                                                id="restaurantStreet"
+                                                placeholder="Rua"
+                                                value={this.state.streetEdit}
+                                                inputType="street"
+                                            />
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="int"
+                                                id="restaurantNumber"
+                                                placeholder="Número"
+                                                value={this.state.numberEdit}
+                                                inputType="number" 
+                                            />
+                                            <EditInput 
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="text"
+                                                id="restaurantCity"
+                                                placeholder="Cidade"
+                                                value={this.state.cityEdit}
+                                                inputType="city"
+                                            />
+                                            <EditInput 
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="text"
+                                                id="restaurantState"
+                                                placeholder="Estado"
+                                                value={this.state.stateEdit}
+                                                inputType="state"
+                                            />
+                                            <EditInput 
+                                                handleEditInputChange={this.phoneMasker}
+                                                type="text"
+                                                id="restaurantPhone"
+                                                placeholder="Telefone"
+                                                value={this.state.phoneEdit}
+                                                inputType="phone"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </TabContent>
-                        {/* <TabPanel value={this.state.tabPosition} index={1}>
-                            <div style={{ height: 700 }} className="restaurant-profile-item">
-                                <div className="restaurant-profile-section">
-                                    <h3 className="section-title">Informações do perfil</h3>
-                                    <div className="edit-profile-item">
-                                        <div className="form-floating mb-3 form-edit">
-                                            <input onChange={char => this.handleEditInputChange('email', char.target.value)} type="email" className="form-control edit-input" id="floatingInput" placeholder="Email" value={this.state.emailEdit} />
-                                            <label htmlFor="floatingInput">Email</label>
-                                        </div>
-                                        <div className="form-floating mb-3 form-edit">
-                                            <input onChange={char => this.handleEditInputChange('name', char.target.value)} type="text" className="form-control edit-input" id="restaurantName" placeholder="Nome do restaurante" value={this.state.nameEdit} />
-                                            <label htmlFor="restaurantName">Nome do restaurante</label>
-                                        </div>
-                                        <div className="form-floating mb-3 form-edit">
-                                            <input onChange={char => this.handleEditInputChange('street', char.target.value)} type="text" className="form-control edit-input" id="restaurantStreet" placeholder="Rua" value={this.state.streetEdit} />
-                                            <label htmlFor="restaurantStreet">Rua</label>
-                                        </div>
-                                        <div className="form-floating mb-3 form-edit">
-                                            <input onChange={char => this.handleEditInputChange('number', char.target.value)} type="int" className="form-control edit-input" id="restaurantNumber" placeholder="Número" value={this.state.numberEdit} />
-                                            <label htmlFor="restaurantNumber">Número</label>
-                                        </div>
-                                        <div className="form-floating mb-3 form-edit">
-                                            <input onChange={char => this.handleEditInputChange('city', char.target.value)} type="text" className="form-control edit-input" id="restaurantCity" placeholder="Cidade" value={this.state.cityEdit} />
-                                            <label htmlFor="restaurantCity">Cidade</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </TabPanel>
-                        <TabPanel value={this.state.tabPosition} index={2}>
-                            Test3
-                        </TabPanel> */}
                     </div>
                 </div>
                 <Footer />
