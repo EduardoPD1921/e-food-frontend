@@ -18,6 +18,8 @@ import SaveIcon from '@material-ui/icons/Save'
 
 import VMasker from 'vanilla-masker'
 
+const tokenAuth = Cookies.get('restaurantToken')
+
 class RestaurantProfile extends React.Component {
     constructor(props) {
         super(props)
@@ -39,7 +41,7 @@ class RestaurantProfile extends React.Component {
 
     componentDidMount() {
         this.setState({ isLoading: true })
-        const tokenAuth = Cookies.get('restaurantToken')
+        // const tokenAuth = Cookies.get('restaurantToken')
 
         axios({
             url: 'http://127.0.0.1:8000/api/restaurant/getProfileInfo',
@@ -121,6 +123,31 @@ class RestaurantProfile extends React.Component {
         return maskedPhone
     }
 
+    submitEditForm = () => {
+        const data = {
+            name: this.state.nameEdit,
+            street: this.state.streetEdit,
+            number: this.state.numberEdit,
+            city: this.state.cityEdit,
+            state: this.state.stateEdit,
+            phone_number: this.state.phoneEdit
+        }
+
+        axios({
+            method: 'PUT',
+            url: 'http://127.0.0.1:8000/api/restaurant/updateProfile',
+            headers: {
+                'Authorization': `Bearer ${tokenAuth}`
+            },
+            data: data
+        })
+            .then(resp => {
+                window.location.reload()
+                console.log(resp)
+            })
+            .catch(error => console.log(error.response))
+    }
+
     render() {
         return (
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
@@ -194,6 +221,7 @@ class RestaurantProfile extends React.Component {
                                                 inputType="phone"
                                             />
                                             <Button
+                                                onClick={() => this.submitEditForm()}
                                                 style={{ marginRight: 20 }}
                                                 variant="contained"
                                                 color="primary"

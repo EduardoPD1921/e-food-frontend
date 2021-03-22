@@ -76,6 +76,8 @@ const RestaurantRegister = props => {
     const onSubmitRegisterFormHandler = () => {
         setIsLoading(true)
 
+        const phoneUnmasked = VMasker.toPattern(phone, "99999999999")
+
         const data = new FormData()
 
         data.append('email', email)
@@ -86,7 +88,7 @@ const RestaurantRegister = props => {
         data.append('cep', cep)
         data.append('city', city)
         data.append('state', state)
-        data.append('phone_number', phone)
+        data.append('phone_number', phoneUnmasked)
 
         axios({
             method: 'POST',
