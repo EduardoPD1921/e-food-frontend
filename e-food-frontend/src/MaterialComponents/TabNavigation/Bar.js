@@ -20,9 +20,9 @@ const Bar = props => {
                 aria-label="TabNavigator"
                 centered
             >
-                <Tab style={{ textTransform: 'none', fontWeight: '600' }} label="Perfil" icon={<StorefrontIcon />} />
-                <Tab style={{ textTransform: 'none', fontWeight: '600' }} label="Editar perfil" icon={<EditIcon />} />
-                <Tab style={{ textTransform: 'none', fontWeight: '600' }} label="payload" icon={<EditIcon />} />
+                <Tab className="tab-option" style={{ textTransform: 'none', fontWeight: '600' }} label="Perfil" icon={<StorefrontIcon />} />
+                <Tab className="tab-option" style={{ textTransform: 'none', fontWeight: '600' }} label="Editar perfil" icon={<EditIcon />} />
+                <Tab className="tab-option" style={{ textTransform: 'none', fontWeight: '600' }} label="payload" icon={<EditIcon />} />
             </Tabs>
         </AppBar>
     )

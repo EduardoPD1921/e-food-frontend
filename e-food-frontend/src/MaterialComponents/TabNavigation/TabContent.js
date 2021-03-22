@@ -13,7 +13,7 @@ function TabPanel(props) {
             aria-labelledby={`scrollable-force-tab-${index}`}
         >
             {value === index && (
-                <Box style={{ width: '99vh' }}>
+                <Box style={{ width: '95vh' }}>
                     {children}
                 </Box>
             )}

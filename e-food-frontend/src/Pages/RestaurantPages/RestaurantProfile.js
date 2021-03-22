@@ -9,9 +9,12 @@ import Bar from '../../MaterialComponents/TabNavigation/Bar'
 import TabContent from '../../MaterialComponents/TabNavigation/TabContent'
 import EditInput from '../../Components/EditInput'
 
+import Button from '@material-ui/core/Button'
+
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
+import SaveIcon from '@material-ui/icons/Save'
 
 import VMasker from 'vanilla-masker'
 
@@ -21,6 +24,7 @@ class RestaurantProfile extends React.Component {
 
         this.state = {
             profileInfo: {},
+            viewPhoneNumber: '',
             emailEdit: '',
             nameEdit: '',
             streetEdit: '',
@@ -45,16 +49,17 @@ class RestaurantProfile extends React.Component {
             }
         })
             .then(resp => {
-                // this.setState({ profileInfo: resp.data, isLoading: false })
+                this.phoneMasker(resp.data.phone_number)
+
                 this.setState({
                     profileInfo: resp.data,
+                    viewPhoneNumber: this.viewPhoneMasked(resp.data.phone_number),
                     emailEdit: resp.data.email,
                     nameEdit: resp.data.name,
                     streetEdit: resp.data.street,
                     numberEdit: resp.data.number,
                     cityEdit: resp.data.city,
                     stateEdit: resp.data.state,
-                    phoneEdit: resp.data.phone_number,
                     isLoading: false
                 })
             })
@@ -78,7 +83,7 @@ class RestaurantProfile extends React.Component {
                 <InfoRow index="Número" value={this.state.profileInfo.number} />
                 <InfoRow index="Cidade" value={this.state.profileInfo.city} background />
                 <InfoRow index="Estado" value={this.state.profileInfo.state} />
-                <InfoRow index="Telefone" value={this.state.profileInfo.phone_number} background />
+                <InfoRow index="Telefone" value={this.state.viewPhoneNumber} background />
             </React.Fragment>
         )
     }
@@ -110,6 +115,12 @@ class RestaurantProfile extends React.Component {
         this.setState({ phoneEdit: maskedPhone })
     }
 
+    viewPhoneMasked = value => {
+        const maskedPhone = VMasker.toPattern(value, "(99) 99999-9999")
+
+        return maskedPhone
+    }
+
     render() {
         return (
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
@@ -134,14 +145,6 @@ class RestaurantProfile extends React.Component {
                                     <div className="restaurant-profile-section">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
-                                            <EditInput
-                                                handleEditInputChange={this.handleEditInputChange} 
-                                                type="email" 
-                                                id="restaurantEmail" 
-                                                placeholder="Email" 
-                                                value={this.state.emailEdit}
-                                                inputType="email" 
-                                            />
                                             <EditInput 
                                                 handleEditInputChange={this.handleEditInputChange}
                                                 type="text"
@@ -190,6 +193,15 @@ class RestaurantProfile extends React.Component {
                                                 value={this.state.phoneEdit}
                                                 inputType="phone"
                                             />
+                                            <Button
+                                                style={{ marginRight: 20 }}
+                                                variant="contained"
+                                                color="primary"
+                                                endIcon={<SaveIcon />}
+                                                className="submit-edit-button"
+                                            >
+                                                Salvar
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>
