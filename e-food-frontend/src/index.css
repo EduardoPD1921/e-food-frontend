@@ -645,7 +645,7 @@ ul {
 }
 
 .submit-edit-button {
-  width: 15%;
+  width: 25%;
   align-self: flex-end;
 }
 
@@ -655,6 +655,24 @@ ul {
 
 .tab-option:focus {
   outline: none;
+}
+
+.error-button {
+  display: flex;
+  flex-direction: row;
+}
+
+.error-message {
+  flex: 1;
+  margin-left: 35px;
+  color: #ea1d2c;
+  font-style: italic;
+}
+
+.save-changes-button {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .profile-info {

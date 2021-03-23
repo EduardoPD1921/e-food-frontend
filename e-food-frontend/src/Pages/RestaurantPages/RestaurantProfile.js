@@ -8,6 +8,7 @@ import InfoRow from '../../Components/InfoRow'
 import Bar from '../../MaterialComponents/TabNavigation/Bar'
 import TabContent from '../../MaterialComponents/TabNavigation/TabContent'
 import EditInput from '../../Components/EditInput'
+import Notification from '../../MaterialComponents/Notification'
 
 import Button from '@material-ui/core/Button'
 
@@ -34,14 +35,24 @@ class RestaurantProfile extends React.Component {
             cityEdit: '',
             stateEdit: '',
             phoneEdit: '',
+            emailError: false,
+            phoneNumberError: false,
+            nameError: false,
+            streetError: false,
+            numberError: false,
+            cityError: false,
+            stateError: false,
+            errorMessage: '',
             tabPosition: 0,
-            isLoading: false
+            isLoading: false,
+            isSnackbarOpen: false
         }
     }
 
     componentDidMount() {
+        this.openSnackBar()
+
         this.setState({ isLoading: true })
-        // const tokenAuth = Cookies.get('restaurantToken')
 
         axios({
             url: 'http://127.0.0.1:8000/api/restaurant/getProfileInfo',
@@ -123,6 +134,42 @@ class RestaurantProfile extends React.Component {
         return maskedPhone
     }
 
+    errorHandler = error => {
+        this.setState({
+            nameError: false,
+            streetError: false,
+            numberError: false,
+            cityError: false,
+            stateError: false,
+            phoneNumberError: false,
+            errorMessage: 'Valores inválidos!'
+        })
+
+        if (error.name) {
+            this.setState({ nameError: true })
+        }
+
+        if (error.street) {
+            this.setState({ streetError: true })
+        }
+
+        if (error.number) {
+            this.setState({ numberError: true })
+        }
+
+        if (error.city) {
+            this.setState({ cityError: true })
+        }
+
+        if (error.state) {
+            this.setState({ stateError: true })
+        }
+
+        if (error.phone_number) {
+            this.setState({ phoneNumberError: true })
+        }
+    }
+
     submitEditForm = () => {
         const data = {
             name: this.state.nameEdit,
@@ -143,9 +190,35 @@ class RestaurantProfile extends React.Component {
         })
             .then(resp => {
                 window.location.reload()
-                console.log(resp)
+                localStorage.setItem('openSnackbar', true)
             })
-            .catch(error => console.log(error.response))
+            .catch(error => {
+                this.errorHandler(error.response.data)
+            })
+    }
+
+    openSnackBar = () => {
+        const openSnackBar = localStorage.getItem('openSnackbar')
+
+        if (openSnackBar) {
+            this.setState({ isSnackbarOpen: true })
+        }
+
+        localStorage.removeItem('openSnackbar')
+    }
+
+    onCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return
+        }
+
+        this.setState({ isSnackbarOpen: false })
+    }
+
+    renderErrorMessage = () => {
+        if (this.state.errorMessage) {
+            return <span>{this.state.errorMessage}</span>
+        }
     }
 
     render() {
@@ -172,7 +245,8 @@ class RestaurantProfile extends React.Component {
                                     <div className="restaurant-profile-section">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
-                                            <EditInput 
+                                            <EditInput
+                                                error={this.state.nameError} 
                                                 handleEditInputChange={this.handleEditInputChange}
                                                 type="text"
                                                 id="restaurantName"
@@ -181,6 +255,7 @@ class RestaurantProfile extends React.Component {
                                                 inputType="name"
                                             />
                                             <EditInput
+                                                error={this.state.streetError}
                                                 handleEditInputChange={this.handleEditInputChange} 
                                                 type="text"
                                                 id="restaurantStreet"
@@ -189,6 +264,7 @@ class RestaurantProfile extends React.Component {
                                                 inputType="street"
                                             />
                                             <EditInput
+                                                error={this.state.numberError}
                                                 handleEditInputChange={this.handleEditInputChange}
                                                 type="int"
                                                 id="restaurantNumber"
@@ -196,7 +272,8 @@ class RestaurantProfile extends React.Component {
                                                 value={this.state.numberEdit}
                                                 inputType="number" 
                                             />
-                                            <EditInput 
+                                            <EditInput
+                                                error={this.state.cityError} 
                                                 handleEditInputChange={this.handleEditInputChange}
                                                 type="text"
                                                 id="restaurantCity"
@@ -205,6 +282,7 @@ class RestaurantProfile extends React.Component {
                                                 inputType="city"
                                             />
                                             <EditInput 
+                                                error={this.state.stateError}
                                                 handleEditInputChange={this.handleEditInputChange}
                                                 type="text"
                                                 id="restaurantState"
@@ -213,6 +291,7 @@ class RestaurantProfile extends React.Component {
                                                 inputType="state"
                                             />
                                             <EditInput 
+                                                error={this.state.phoneNumberError}
                                                 handleEditInputChange={this.phoneMasker}
                                                 type="text"
                                                 id="restaurantPhone"
@@ -220,22 +299,30 @@ class RestaurantProfile extends React.Component {
                                                 value={this.state.phoneEdit}
                                                 inputType="phone"
                                             />
-                                            <Button
-                                                onClick={() => this.submitEditForm()}
-                                                style={{ marginRight: 20 }}
-                                                variant="contained"
-                                                color="primary"
-                                                endIcon={<SaveIcon />}
-                                                className="submit-edit-button"
-                                            >
-                                                Salvar
-                                            </Button>
+                                            <div className="error-button">
+                                                <div className="error-message">
+                                                    {this.renderErrorMessage()}
+                                                </div>
+                                                <div className="save-changes-button">
+                                                    <Button
+                                                        onClick={() => this.submitEditForm()}
+                                                        style={{ marginRight: 20 }}
+                                                        variant="contained"
+                                                        color="primary"
+                                                        endIcon={<SaveIcon />}
+                                                        className="submit-edit-button"
+                                                    >
+                                                        Salvar
+                                                    </Button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </TabContent>
                     </div>
                 </div>
+                <Notification message="Alterações salvas!" onCloseSnackbar={this.onCloseSnackbar} isSnackbarOpen={this.state.isSnackbarOpen} />
                 <Footer />
             </div>
         )

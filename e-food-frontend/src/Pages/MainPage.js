@@ -40,7 +40,7 @@ class MainPage extends React.Component {
             <div className="container-fluid">
                 <Nav mainPage={true} />
                 <Header />
-                <Notification onCloseSnackbar={this.onCloseSnackbar} isSnackbarOpen={this.state.isSnackbarOpen} />
+                <Notification message="Conta criada com sucesso!" onCloseSnackbar={this.onCloseSnackbar} isSnackbarOpen={this.state.isSnackbarOpen} />
                 <Footer />
             </div>
         )

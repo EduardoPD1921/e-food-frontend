@@ -6,7 +6,7 @@ const EditInput = props => {
             <input
                 onChange={char => props.handleEditInputChange(char.target.value, props.inputType)} 
                 type={props.type} 
-                className="form-control edit-input" 
+                className={`form-control edit-input ${props.error ? 'is-invalid' : ''}`} 
                 id={props.id} 
                 placeholder={props.placeholder} 
                 value={props.value} 

@@ -107,7 +107,7 @@ const RestaurantLogin = props => {
                 <div className="login-form">
                     <StorefrontIcon className="user-img" style={{ color: red[600], fontSize: 100 }} />
                     <LoginInput onChangeTextHandler={onChangeTextHandler} errorMessage={emailMessage} label="Email" />
-                    <LoginInput onChangeTextHandler={onChangeTextHandler} errorMessage={passwordMessage} label="Password" />
+                    <LoginInput onChangeTextHandler={onChangeTextHandler} errorMessage={passwordMessage} label="Senha" />
                     {renderButton()}
                 </div>
             </section>
