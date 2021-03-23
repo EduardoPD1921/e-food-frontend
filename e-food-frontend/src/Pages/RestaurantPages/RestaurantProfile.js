@@ -7,7 +7,7 @@ import Footer from '../../Components/Footer/Footer'
 import InfoRow from '../../Components/InfoRow'
 import Bar from '../../MaterialComponents/TabNavigation/Bar'
 import TabContent from '../../MaterialComponents/TabNavigation/TabContent'
-// import EditInput from '../../Components/EditInput/EditInput'
+import EditInput from '../../Components/EditInput/EditInput'
 import EditForm from '../../Components/EditInput'
 import Notification from '../../MaterialComponents/Notification'
 
@@ -29,14 +29,16 @@ class RestaurantProfile extends React.Component {
         this.state = {
             profileInfo: {},
             viewPhoneNumber: '',
-            emailEdit: '',
+            lastEmail: '',
+            newEmail: '',
             nameEdit: '',
             streetEdit: '',
             numberEdit: '',
             cityEdit: '',
             stateEdit: '',
             phoneEdit: '',
-            emailError: false,
+            newEmailError: false,
+            lastEmailError: false,
             phoneNumberError: false,
             nameError: false,
             streetError: false,
@@ -44,6 +46,7 @@ class RestaurantProfile extends React.Component {
             cityError: false,
             stateError: false,
             errorMessage: '',
+            emailErrorMessage: '',
             tabPosition: 0,
             isLoading: false,
             isSnackbarOpen: false
@@ -68,7 +71,6 @@ class RestaurantProfile extends React.Component {
                 this.setState({
                     profileInfo: resp.data,
                     viewPhoneNumber: this.viewPhoneMasked(resp.data.phone_number),
-                    emailEdit: resp.data.email,
                     nameEdit: resp.data.name,
                     streetEdit: resp.data.street,
                     numberEdit: resp.data.number,
@@ -104,8 +106,10 @@ class RestaurantProfile extends React.Component {
 
     handleEditInputChange = (value, type) => {
         switch(type) {
-            case 'email':
-                return this.setState({ emailEdit: value })
+            case 'newEmail':
+                return this.setState({ newEmail: value })
+            case 'lastEmail':
+                return this.setState({ lastEmail: value })
             case 'name':
                 return this.setState({ nameEdit: value })
             case 'street':
@@ -198,6 +202,24 @@ class RestaurantProfile extends React.Component {
             })
     }
 
+    submitEmailChanges = () => {
+        const data = {
+            lastEmail: this.state.lastEmail,
+            newEmail: this.state.newEmail
+        }
+
+        axios({
+            method: 'PUT',
+            url: 'http://127.0.0.1:8000/api/restaurant/updateEmail',
+            headers: {
+                'Authorization': `Bearer ${tokenAuth}`
+            },
+            data: data
+        })
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error.response))
+    }
+
     openSnackBar = () => {
         const openSnackBar = localStorage.getItem('openSnackbar')
 
@@ -222,6 +244,12 @@ class RestaurantProfile extends React.Component {
         }
     }
 
+    renderEmailErrorMessage = () => {
+        if (this.state.emailErrorMessage) {
+            return <span>{this.state.emailErrorMessage}</span>
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
@@ -230,7 +258,7 @@ class RestaurantProfile extends React.Component {
                     <div className="appbar-container">
                         <Bar tabPosition={this.state.tabPosition} handlePositionChanged={this.handleChange} />
                             <TabContent tabPosition={this.state.tabPosition} index={0}>
-                                <div className="restaurant-profile-item">
+                                <div className="restaurant-profile-view">
                                     <div className="pre-info">
                                         <StorefrontIcon style={{ color: "#5f56e3", fontSize: 100, marginBottom: 10 }} />
                                         <span className="main-text">{this.state.profileInfo.name}</span>
@@ -242,8 +270,8 @@ class RestaurantProfile extends React.Component {
                                 </div>
                             </TabContent>
                             <TabContent tabPosition={this.state.tabPosition} index={1}>
-                                <div style={{ height: 900 }} className="restaurant-profile-item">
-                                    <div className="restaurant-profile-section">
+                                <div style={{ height: 1000 }} className="restaurant-profile-edit-page">
+                                    <div className="restaurant-profile-edit">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
                                             <EditForm
@@ -281,8 +309,43 @@ class RestaurantProfile extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="restaurant-profile-section">
+                                    <div className="restaurant-profile-edit-email">
                                         <h3 className="section-title">Alterar E-mail</h3>
+                                        <div className="edit-profile-item">
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="email"
+                                                error={this.state.lastEmailError}
+                                                id="restaurantLastEmail"
+                                                placeholder="E-mail atual"
+                                                inputType="lastEmail"
+                                            />
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="email"
+                                                error={this.state.newEmailError}
+                                                id="restaurantNewEmail"
+                                                placeholder="Novo E-mail"
+                                                inputType="newEmail"
+                                            />
+                                            <div className="error-button">
+                                                <div className="error-message">
+                                                    {this.renderEmailErrorMessage()}
+                                                </div>
+                                                <div className="save-changes-button">
+                                                    <Button
+                                                        onClick={() => this.submitEmailChanges()}
+                                                        style={{ marginRight: 20 }}
+                                                        variant="contained"
+                                                        color="primary"
+                                                        endIcon={<SaveIcon />}
+                                                        className="submit-edit-button"
+                                                    >
+                                                        Salvar
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </TabContent>

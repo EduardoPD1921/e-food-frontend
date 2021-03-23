@@ -606,18 +606,7 @@ ul {
   width: 50%;
 }
 
-/* .restaurant-profile-info {
-  display: flex;
-  flex-direction: row;
-  margin: -120px 0 100px 0;
-  position: relative;
-  background-color: white;
-  width: 50%;
-  height: 500px;
-  border-radius: 10px;
-} */
-
-.restaurant-profile-item {
+.restaurant-profile-view {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -627,9 +616,25 @@ ul {
   border-radius: 0 0 10px 10px;
 }
 
-.restaurant-profile-section {
+.restaurant-profile-edit-page {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+}
+
+.restaurant-profile-edit {
   margin: 30px;
   height: 600px;
+  width: 95%;
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238);
+}
+
+.restaurant-profile-edit-email {
+  margin: 30px;
+  height: 300px;
   width: 95%;
   border-radius: 10px;
   background-color: rgb(238, 238, 238);
