@@ -33,7 +33,7 @@ const RestaurantLogin = props => {
         switch (type) {
             case 'Email':
                 return setEmail(value)
-            case 'Password':
+            case 'Senha':
                 return setPassword(value)
             default:
                 console.log(type)

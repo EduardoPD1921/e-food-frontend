@@ -7,7 +7,8 @@ import Footer from '../../Components/Footer/Footer'
 import InfoRow from '../../Components/InfoRow'
 import Bar from '../../MaterialComponents/TabNavigation/Bar'
 import TabContent from '../../MaterialComponents/TabNavigation/TabContent'
-import EditInput from '../../Components/EditInput'
+// import EditInput from '../../Components/EditInput/EditInput'
+import EditForm from '../../Components/EditInput'
 import Notification from '../../MaterialComponents/Notification'
 
 import Button from '@material-ui/core/Button'
@@ -245,59 +246,21 @@ class RestaurantProfile extends React.Component {
                                     <div className="restaurant-profile-section">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
-                                            <EditInput
-                                                error={this.state.nameError} 
+                                            <EditForm
                                                 handleEditInputChange={this.handleEditInputChange}
-                                                type="text"
-                                                id="restaurantName"
-                                                placeholder="Nome do restaurante"
-                                                value={this.state.nameEdit}
-                                                inputType="name"
-                                            />
-                                            <EditInput
-                                                error={this.state.streetError}
-                                                handleEditInputChange={this.handleEditInputChange} 
-                                                type="text"
-                                                id="restaurantStreet"
-                                                placeholder="Rua"
-                                                value={this.state.streetEdit}
-                                                inputType="street"
-                                            />
-                                            <EditInput
-                                                error={this.state.numberError}
-                                                handleEditInputChange={this.handleEditInputChange}
-                                                type="int"
-                                                id="restaurantNumber"
-                                                placeholder="Número"
-                                                value={this.state.numberEdit}
-                                                inputType="number" 
-                                            />
-                                            <EditInput
-                                                error={this.state.cityError} 
-                                                handleEditInputChange={this.handleEditInputChange}
-                                                type="text"
-                                                id="restaurantCity"
-                                                placeholder="Cidade"
-                                                value={this.state.cityEdit}
-                                                inputType="city"
-                                            />
-                                            <EditInput 
-                                                error={this.state.stateError}
-                                                handleEditInputChange={this.handleEditInputChange}
-                                                type="text"
-                                                id="restaurantState"
-                                                placeholder="Estado"
-                                                value={this.state.stateEdit}
-                                                inputType="state"
-                                            />
-                                            <EditInput 
-                                                error={this.state.phoneNumberError}
-                                                handleEditInputChange={this.phoneMasker}
-                                                type="text"
-                                                id="restaurantPhone"
-                                                placeholder="Telefone"
-                                                value={this.state.phoneEdit}
-                                                inputType="phone"
+                                                handlePhoneMasker={this.phoneMasker}
+                                                nameValue={this.state.nameEdit}
+                                                streetValue={this.state.streetEdit}
+                                                numberValue={this.state.numberEdit}
+                                                cityValue={this.state.cityEdit}
+                                                stateValue={this.state.stateEdit}
+                                                phoneValue={this.state.phoneEdit}
+                                                nameError={this.state.nameError}
+                                                streetError={this.state.streetError}
+                                                numberError={this.state.numberError}
+                                                cityError={this.state.cityError}
+                                                stateError={this.state.stateError}
+                                                phoneError={this.state.phoneNumberError} 
                                             />
                                             <div className="error-button">
                                                 <div className="error-message">
@@ -317,6 +280,9 @@ class RestaurantProfile extends React.Component {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="restaurant-profile-section">
+                                        <h3 className="section-title">Alterar E-mail</h3>
                                     </div>
                                 </div>
                             </TabContent>
