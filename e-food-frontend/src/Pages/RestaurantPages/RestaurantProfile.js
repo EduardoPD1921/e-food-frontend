@@ -147,7 +147,8 @@ class RestaurantProfile extends React.Component {
             cityError: false,
             stateError: false,
             phoneNumberError: false,
-            errorMessage: 'Valores inválidos!'
+            lastEmailError: false,
+            newEmailError: false
         })
 
         if (error.name) {
@@ -173,6 +174,59 @@ class RestaurantProfile extends React.Component {
         if (error.phone_number) {
             this.setState({ phoneNumberError: true })
         }
+
+        if (error.lastEmail) {
+            if (error.lastEmail[0] === 'The last email field is required.') {
+                this.setState({
+                    lastEmailError: true,
+                    emailErrorMessage: 'O E-mail atual é necessário!'
+                })
+            }
+
+            if (error.lastEmail[0] === 'The last email must be a valid email address.') {
+                this.setState({
+                    lastEmailError: true,
+                    emailErrorMessage: 'O E-mail atual precisa ser válido!'
+                })
+            }
+        }
+
+        if (error.newEmail) {
+            if (error.newEmail[0] === 'The new email field is required.') {
+                this.setState({
+                    newEmailError: true,
+                    emailErrorMessage: 'O novo E-mail é necessário!'
+                })
+            }
+
+            if (error.newEmail[0] === 'The new email must be a valid email address.') {
+                this.setState({
+                    newEmailError: true,
+                    emailErrorMessage: 'O novo E-mail precisa ser válido!'
+                })
+            }
+        }
+
+        if (error === 'wrong-last-email') {
+            this.setState({
+                lastEmailError: true,
+                emailErrorMessage: 'E-mail atual incorreto!'
+            })
+        }
+
+        if (error === 'this-email-is-already-yours') {
+            this.setState({
+                newEmailError: true,
+                emailErrorMessage: 'Este E-mail já é seu!'
+            })
+        }
+
+        if (error === 'email-has-already-been-taken') {
+            this.setState({
+                newEmailError: true,
+                emailErrorMessage: 'Este E-mail já está cadastrado!'
+            })
+        }
     }
 
     submitEditForm = () => {
@@ -193,11 +247,11 @@ class RestaurantProfile extends React.Component {
             },
             data: data
         })
-            .then(resp => {
-                window.location.reload()
-                localStorage.setItem('openSnackbar', true)
+            .then(() => {
+                this.onSuccessSubmit()
             })
             .catch(error => {
+                this.setState({ errorMessage: 'Valores inválidos!' })
                 this.errorHandler(error.response.data)
             })
     }
@@ -216,8 +270,13 @@ class RestaurantProfile extends React.Component {
             },
             data: data
         })
-            .then(resp => console.log(resp))
-            .catch(error => console.log(error.response))
+            .then(() => this.onSuccessSubmit())
+            .catch(error => this.errorHandler(error.response.data))
+    }
+
+    onSuccessSubmit = () => {
+        window.location.reload()
+        localStorage.setItem('openSnackbar', true)
     }
 
     openSnackBar = () => {
