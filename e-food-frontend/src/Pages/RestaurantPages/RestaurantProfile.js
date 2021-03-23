@@ -35,8 +35,12 @@ class RestaurantProfile extends React.Component {
             cityEdit: '',
             stateEdit: '',
             phoneEdit: '',
+            lastPassword: '',
+            newPassword: '',
             newEmailError: false,
             lastEmailError: false,
+            newPasswordError: false,
+            lastPasswordError: false,
             phoneNumberError: false,
             nameError: false,
             streetError: false,
@@ -108,6 +112,10 @@ class RestaurantProfile extends React.Component {
                 return this.setState({ newEmail: value })
             case 'lastEmail':
                 return this.setState({ lastEmail: value })
+            case 'newPassword':
+                return this.setState({ newPassword: value })
+            case 'lastPassword':
+                return this.setState({ lastPassword: value })
             case 'name':
                 return this.setState({ nameEdit: value })
             case 'street':
@@ -327,7 +335,7 @@ class RestaurantProfile extends React.Component {
                                 </div>
                             </TabContent>
                             <TabContent tabPosition={this.state.tabPosition} index={1}>
-                                <div style={{ height: 1000 }} className="restaurant-profile-edit-page">
+                                <div style={{ height: 1300 }} className="restaurant-profile-edit-page">
                                     <div className="restaurant-profile-edit">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
@@ -352,16 +360,6 @@ class RestaurantProfile extends React.Component {
                                                     {this.renderErrorMessage()}
                                                 </div>
                                                 <div className="save-changes-button">
-                                                    {/* <Button
-                                                        onClick={() => this.submitEditForm()}
-                                                        style={{ marginRight: 20 }}
-                                                        variant="contained"
-                                                        color="primary"
-                                                        endIcon={<SaveIcon />}
-                                                        className="submit-edit-button"
-                                                    >
-                                                        Salvar
-                                                    </Button> */}
                                                     <SubmitEditButton handleClick={this.submitEditForm} />
                                                 </div>
                                             </div>
@@ -391,19 +389,30 @@ class RestaurantProfile extends React.Component {
                                                     {this.renderEmailErrorMessage()}
                                                 </div>
                                                 <div className="save-changes-button">
-                                                    {/* <Button
-                                                        onClick={() => this.submitEmailChanges()}
-                                                        style={{ marginRight: 20 }}
-                                                        variant="contained"
-                                                        color="primary"
-                                                        endIcon={<SaveIcon />}
-                                                        className="submit-edit-button"
-                                                    >
-                                                        Salvar
-                                                    </Button> */}
                                                     <SubmitEditButton handleClick={this.submitEmailChanges} />
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className="restaurant-profile-edit-password">
+                                        <h3 className="section-title">Alterar senha</h3>
+                                        <div className="edit-profile-item">
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="password"
+                                                error={this.state.lastPasswordError}
+                                                id="restaurantLastPassword"
+                                                placeholder="Senha atual"
+                                                inputType="lastPassword"
+                                            />
+                                            <EditInput
+                                                handleEditInputChange={this.handleEditInputChange}
+                                                type="password"
+                                                error={this.state.newPasswordError}
+                                                id="restaurantNewPassword"
+                                                placeholder="Nova senha"
+                                                inputType="newPassword" 
+                                            />
                                         </div>
                                     </div>
                                 </div>

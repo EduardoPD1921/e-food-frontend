@@ -640,6 +640,14 @@ ul {
   background-color: rgb(238, 238, 238);
 }
 
+.restaurant-profile-edit-password {
+  margin: 30px;
+  height: 300px;
+  width: 95%;
+  border-radius: 10px;
+  background-color: rgb(238, 238, 238);
+}
+
 .pre-info {
   display: flex;
   flex: 2;

@@ -8,7 +8,7 @@ const SubmitEditButton = props => {
     return (
         <Button
             onClick={() => props.handleClick()}
-            style={{ marginRight: 20 }}
+            style={{ marginRight: 20, marginBottom: 20 }}
             variant="contained"
             color="primary"
             endIcon={<SaveIcon />}
