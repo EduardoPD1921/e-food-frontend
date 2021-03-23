@@ -10,13 +10,11 @@ import TabContent from '../../MaterialComponents/TabNavigation/TabContent'
 import EditInput from '../../Components/EditInput/EditInput'
 import EditForm from '../../Components/EditInput'
 import Notification from '../../MaterialComponents/Notification'
-
-import Button from '@material-ui/core/Button'
+import SubmitEditButton from '../../Components/SubmitEditButton'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import StorefrontIcon from '@material-ui/icons/Storefront'
-import SaveIcon from '@material-ui/icons/Save'
 
 import VMasker from 'vanilla-masker'
 
@@ -354,7 +352,7 @@ class RestaurantProfile extends React.Component {
                                                     {this.renderErrorMessage()}
                                                 </div>
                                                 <div className="save-changes-button">
-                                                    <Button
+                                                    {/* <Button
                                                         onClick={() => this.submitEditForm()}
                                                         style={{ marginRight: 20 }}
                                                         variant="contained"
@@ -363,7 +361,8 @@ class RestaurantProfile extends React.Component {
                                                         className="submit-edit-button"
                                                     >
                                                         Salvar
-                                                    </Button>
+                                                    </Button> */}
+                                                    <SubmitEditButton handleClick={this.submitEditForm} />
                                                 </div>
                                             </div>
                                         </div>
@@ -392,7 +391,7 @@ class RestaurantProfile extends React.Component {
                                                     {this.renderEmailErrorMessage()}
                                                 </div>
                                                 <div className="save-changes-button">
-                                                    <Button
+                                                    {/* <Button
                                                         onClick={() => this.submitEmailChanges()}
                                                         style={{ marginRight: 20 }}
                                                         variant="contained"
@@ -401,7 +400,8 @@ class RestaurantProfile extends React.Component {
                                                         className="submit-edit-button"
                                                     >
                                                         Salvar
-                                                    </Button>
+                                                    </Button> */}
+                                                    <SubmitEditButton handleClick={this.submitEmailChanges} />
                                                 </div>
                                             </div>
                                         </div>
