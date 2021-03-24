@@ -49,6 +49,7 @@ class RestaurantProfile extends React.Component {
             stateError: false,
             errorMessage: '',
             emailErrorMessage: '',
+            passwordErrorMessage: '',
             tabPosition: 0,
             isLoading: false,
             isSnackbarOpen: false
@@ -154,7 +155,9 @@ class RestaurantProfile extends React.Component {
             stateError: false,
             phoneNumberError: false,
             lastEmailError: false,
-            newEmailError: false
+            newEmailError: false,
+            lastPasswordError: false,
+            newPasswordError: false
         })
 
         if (error.name) {
@@ -213,6 +216,24 @@ class RestaurantProfile extends React.Component {
             }
         }
 
+        if (error.lastPassword) {
+            if (error.lastPassword[0] === 'The last password field is required.') {
+                this.setState({
+                    lastPasswordError: true,
+                    passwordErrorMessage: 'A senha atual é necessária!'
+                })
+            }
+        }
+
+        if (error.newPassword) {
+            if (error.newPassword[0] === 'The new password field is required.') {
+                this.setState({
+                    newPasswordError: true,
+                    passwordErrorMessage: 'A nova senha é necessária!'
+                })
+            }
+        }
+
         if (error === 'wrong-last-email') {
             this.setState({
                 lastEmailError: true,
@@ -231,6 +252,13 @@ class RestaurantProfile extends React.Component {
             this.setState({
                 newEmailError: true,
                 emailErrorMessage: 'Este E-mail já está cadastrado!'
+            })
+        }
+
+        if (error === 'wrong-last-password') {
+            this.setState({
+                lastPasswordError: true,
+                passwordErrorMessage: 'Senha atual incorreta!'
             })
         }
     }
@@ -280,6 +308,24 @@ class RestaurantProfile extends React.Component {
             .catch(error => this.errorHandler(error.response.data))
     }
 
+    submitPasswordChanges = () => {
+        const data = {
+            lastPassword: this.state.lastPassword,
+            newPassword: this.state.newPassword
+        }
+
+        axios({
+            method: 'PUT',
+            url: 'http://127.0.0.1:8000/api/restaurant/updatePassword',
+            headers: {
+                'Authorization': `Bearer ${tokenAuth}`
+            },
+            data: data
+        })
+            .then(() => this.onSuccessSubmit())
+            .catch(error => this.errorHandler(error.response.data))
+    }
+
     onSuccessSubmit = () => {
         window.location.reload()
         localStorage.setItem('openSnackbar', true)
@@ -315,6 +361,12 @@ class RestaurantProfile extends React.Component {
         }
     }
 
+    renderPasswordErrorMessage = () => {
+        if (this.state.passwordErrorMessage) {
+            return <span>{this.state.passwordErrorMessage}</span>
+        }
+    }
+
     render() {
         return (
             <div className="container-fluid" style={{ backgroundColor: 'whitesmoke' }}>
@@ -335,7 +387,7 @@ class RestaurantProfile extends React.Component {
                                 </div>
                             </TabContent>
                             <TabContent tabPosition={this.state.tabPosition} index={1}>
-                                <div style={{ height: 1300 }} className="restaurant-profile-edit-page">
+                                <div style={{ height: 1400 }} className="restaurant-profile-edit-page">
                                     <div className="restaurant-profile-edit">
                                         <h3 className="section-title">Informações do perfil</h3>
                                         <div className="edit-profile-item">
@@ -413,6 +465,14 @@ class RestaurantProfile extends React.Component {
                                                 placeholder="Nova senha"
                                                 inputType="newPassword" 
                                             />
+                                            <div className="error-button">
+                                                <div className="error-message">
+                                                    {this.renderPasswordErrorMessage()}
+                                                </div>
+                                                <div className="save-changes-button">
+                                                    <SubmitEditButton handleClick={this.submitPasswordChanges} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
